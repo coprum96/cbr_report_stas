@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Центр противодействия финансовому мошенничеству | Банк России</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=PT+Serif:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+
+    <style>
+        :root {
+            /* Authentic CBR Colors */
+            --cbr-blue: #005BAA;
+            --cbr-blue-dark: #003D73;
+            --cbr-blue-light: #E6F2FF;
+            --cbr-gold: #CF9F5D;
+            --cbr-red: #C8102E;
+            --cbr-green: #008542;
+            --cbr-orange: #FF6B2B;
+            --cbr-gray: #F5F5F5;
+            --cbr-text: #333333;
+            --cbr-border: #DDDDDD;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'PT Sans', sans-serif;
+            background-color: white;
+            color: var(--cbr-text);
+            line-height: 1.6;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'PT Serif', serif;
+            font-weight: 700;
+        }
+
+        /* Official Header */
+        .header-top {
+            background: linear-gradient(135deg, var(--cbr-blue-dark) 0%, var(--cbr-blue) 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--cbr-blue);
+            font-size: 0.8rem;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .header-title h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .header-title p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'PT Sans', sans-serif;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: var(--cbr-gold);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #B8884A;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(207, 159, 93, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 1rem 0;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .breadcrumb a {
+            color: var(--cbr-blue);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Alert Banner */
+        .alert-banner {
+            background: linear-gradient(135deg, var(--cbr-red) 0%, #A00D25 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 4px 12px rgba(200, 16, 46, 0.2);
+        }
+
+        .alert-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .alert-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Dashboard Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            border: 2px solid var(--cbr-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:hover {
+            border-color: var(--cbr-blue);
+            box-shadow: 0 8px 24px rgba(0, 91, 170, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--cbr-blue);
+        }
+
+        .stat-card.danger::before {
+            background: var(--cbr-red);
+        }
+
+        .stat-card.success::before {
+            background: var(--cbr-green);
+        }
+
+        .stat-card.warning::before {
+            background: var(--cbr-orange);
+        }
+
+        .stat-card.info::before {
+            background: var(--cbr-blue);
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.8;
+        }
+
+        .stat-card.danger .stat-icon {
+            color: var(--cbr-red);
+        }
+
+        .stat-card.success .stat-icon {
+            color: var(--cbr-green);
+        }
+
+        .stat-card.warning .stat-icon {
+            color: var(--cbr-orange);
+        }
+
+        .stat-card.info .stat-icon {
+            color: var(--cbr-blue);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 0.25rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--cbr-text);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-change {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .stat-change.up {
+            color: var(--cbr-red);
+        }
+
+        .stat-change.down {
+            color: var(--cbr-green);
+        }
+
+        /* Section Cards */
+        .section-card {
+            background: white;
+            border: 2px solid var(--cbr-border);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--cbr-blue);
+        }
+
+        .section-header i {
+            font-size: 1.8rem;
+            color: var(--cbr-blue);
+        }
+
+        .section-header h2 {
+            font-size: 1.5rem;
+            color: var(--cbr-blue-dark);
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            border-bottom: 2px solid var(--cbr-border);
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            background: transparent;
+            color: #666;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            font-family: 'PT Sans', sans-serif;
+        }
+
+        .tab:hover {
+            color: var(--cbr-blue);
+            background: var(--cbr-blue-light);
+        }
+
+        .tab.active {
+            color: var(--cbr-blue);
+            border-bottom-color: var(--cbr-blue);
+            background: var(--cbr-blue-light);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Profile Cards */
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .profile-stat {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--cbr-border);
+        }
+
+        .profile-stat:last-child {
+            border-bottom: none;
+        }
+
+        .profile-stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .profile-stat-value {
+            font-weight: 700;
+            color: var(--cbr-text);
+        }
+
+        .risk-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .risk-high {
+            background: #FFEBEE;
+            color: var(--cbr-red);
+        }
+
+        .risk-medium {
+            background: #FFF3E0;
+            color: var(--cbr-orange);
+        }
+
+        .risk-low {
+            background: #E8F5E9;
+            color: var(--cbr-green);
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th,
+        td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--cbr-border);
+        }
+
+        th {
+            background: var(--cbr-gray);
+            font-weight: 700;
+            color: var(--cbr-blue-dark);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        tr:hover {
+            background: var(--cbr-blue-light);
+        }
+
+        /* Chart Container */
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin: 1rem 0;
+        }
+
+        .chart-small {
+            height: 300px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--cbr-gray);
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 4px solid var(--cbr-blue);
+            text-align: center;
+        }
+
+        .footer-logo {
+            margin-bottom: 1rem;
+            color: var(--cbr-blue-dark);
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .footer-text {
+            color: #666;
+            font-size: 0.85rem;
+            line-height: 1.8;
+        }
+
+        /* Scenario Comparison */
+        .scenario-comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .scenario-box {
+            border: 2px solid var(--cbr-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .scenario-box:hover {
+            border-color: var(--cbr-blue);
+            box-shadow: 0 8px 24px rgba(0, 91, 170, 0.15);
+            transform: scale(1.05);
+        }
+
+        .scenario-box.recommended {
+            border-color: var(--cbr-gold);
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+        }
+
+        .scenario-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--cbr-blue-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .scenario-roi {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--cbr-green);
+            margin: 0.5rem 0;
+        }
+
+        .scenario-label {
+            font-size: 0.75rem;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        /* ML Insights */
+        .ml-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .ml-card {
+            border: 2px solid var(--cbr-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .ml-card h3 {
+            color: var(--cbr-blue-dark);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--cbr-border);
+        }
+
+        .metric-row:last-child {
+            border-bottom: none;
+        }
+
+        .metric-label {
+            color: #666;
+        }
+
+        .metric-value {
+            font-weight: 700;
+            color: var(--cbr-green);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-grid,
+            .ml-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Official Header -->
+    <header class="header-top">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">БАНК<br>РОССИИ</div>
+                <div class="header-title">
+                    <h1>Центр противодействия финансовому мошенничеству</h1>
+                    <p>Аналитический отчет 2025–2027 | Конфиденциально</p>
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="window.print()">
+                    <i class="fas fa-print"></i> Печать
+                </button>
+                <button class="btn btn-primary">
+                    <i class="fas fa-download"></i> Экспорт PDF
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="#">Главная</a> / <a href="#">Безопасность</a> / <span>Отчет о финансовом мошенничестве</span>
+        </div>
+
+        <!-- Alert Banner -->
+        <div class="alert-banner">
+            <div class="alert-icon"><i class="fas fa-exclamation-triangle"></i></div>
+            <div class="alert-content">
+                <h3>Критическая ситуация: Рост на 37%</h3>
+                <p>В 2025 году зафиксировано 7.1 млн жертв (+37% к 2024). Убытки составили 98.4 млрд₽ (+35%). Процент
+                    контакта с мошенниками вырос до 36.7% (+23%). Требуются экстренные меры.</p>
+            </div>
+        </div>
+
+        <!-- KPI Grid -->
+        <div class="stats-grid">
+            <div class="stat-card danger">
+                <div class="stat-icon"><i class="fas fa-users"></i></div>
+                <div class="stat-label">Жертвы мошенничества</div>
+                <div class="stat-value">7.1 млн</div>
+                <div class="stat-change up"><i class="fas fa-arrow-up"></i> +37% к 2024</div>
+            </div>
+
+            <div class="stat-card danger">
+                <div class="stat-icon"><i class="fas fa-ruble-sign"></i></div>
+                <div class="stat-label">Финансовые убытки</div>
+                <div class="stat-value">98.4 млрд₽</div>
+                <div class="stat-change up"><i class="fas fa-arrow-up"></i> +35% к 2024</div>
+            </div>
+
+            <div class="stat-card warning">
+                <div class="stat-icon"><i class="fas fa-phone-slash"></i></div>
+                <div class="stat-label">Контакт с мошенниками</div>
+                <div class="stat-value">36.7%</div>
+                <div class="stat-change up"><i class="fas fa-arrow-up"></i> +23% к 2024</div>
+            </div>
+
+            <div class="stat-card success">
+                <div class="stat-icon"><i class="fas fa-shield-alt"></i></div>
+                <div class="stat-label">Восстановлено средств</div>
+                <div class="stat-value">14.6 млрд₽</div>
+                <div class="stat-change up"><i class="fas fa-arrow-up"></i> +3% к 2024</div>
+            </div>
+
+            <div class="stat-card info">
+                <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                <div class="stat-label">Обнаружение мошенничества</div>
+                <div class="stat-value">48 часов</div>
+                <div class="stat-change">Цель: 4 часа к Q4 2026</div>
+            </div>
+
+            <div class="stat-card info">
+                <div class="stat-icon"><i class="fas fa-lock"></i></div>
+                <div class="stat-label">Внедрение 2FA</div>
+                <div class="stat-value">35%</div>
+                <div class="stat-change">Цель: 82% к Q4 2026</div>
+            </div>
+        </div>
+
+        <!-- Fraud Channels Section -->
+        <div class="section-card">
+            <div class="section-header">
+                <i class="fas fa-project-diagram"></i>
+                <h2>Каналы мошенничества и векторы атак</h2>
+            </div>
+
+            <div class="chart-container">
+                <div id="sankeyChart"></div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Канал</th>
+                        <th>Попытки</th>
+                        <th>Проникновение</th>
+                        <th>Конверсия</th>
+                        <th>Средний убыток</th>
+                        <th>Уровень риска</th>
+                        <th>Тренд</th>
+                    </tr>
+                </thead>
+                <tbody id="channelsTable"></tbody>
+            </table>
+        </div>
+
+        <!-- Victim Profiles Section -->
+        <div class="section-card">
+            <div class="section-header">
+                <i class="fas fa-user-tag"></i>
+                <h2>Профили жертв мошенничества (N=468K)</h2>
+            </div>
+
+            <div class="tabs" id="profileTabs"></div>
+            <div id="profileContent"></div>
+        </div>
+
+        <!-- ML Model Performance -->
+        <div class="section-card">
+            <div class="section-header">
+                <i class="fas fa-brain"></i>
+                <h2>Машинное обучение: прогностические модели</h2>
+            </div>
+
+            <div class="ml-grid">
+                <div class="ml-card">
+                    <h3><i class="fas fa-chart-line"></i> Gradient Boosting Model</h3>
+                    <div class="metric-row">
+                        <span class="metric-label">Точность (Accuracy)</span>
+                        <span class="metric-value">89.7%</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-label">Полнота (Recall)</span>
+                        <span class="metric-value">88.5%</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-label">Precision</span>
+                        <span class="metric-value">89.1%</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-label">F1-Score</span>
+                        <span class="metric-value">88.8%</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-label">AUC-ROC</span>
+                        <span class="metric-value">0.92</span>
+                    </div>
+                </div>
+
+                <div class="ml-card">
+                    <h3><i class="fas fa-bullseye"></i> Важность признаков</h3>
+                    <div class="chart-container chart-small">
+                        <canvas id="featureImportanceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Financial Scenarios -->
+        <div class="section-card">
+            <div class="section-header">
+                <i class="fas fa-chart-pie"></i>
+                <h2>Финансовые сценарии противодействия (2026-2027)</h2>
+            </div>
+
+            <div class="scenario-comparison">
+                <div class="scenario-box" onclick="switchScenario('D')">
+                    <div class="scenario-name">Scenario D<br>Minimal</div>
+                    <div class="scenario-roi">2.6x</div>
+                    <div class="scenario-label">Инвестиция: 1.5B₽</div>
+                    <div class="scenario-label">Экономия: 17.4B₽</div>
+                </div>
+
+                <div class="scenario-box" onclick="switchScenario('A')">
+                    <div class="scenario-name">Scenario A<br>Quick Wins</div>
+                    <div class="scenario-roi">23.6x</div>
+                    <div class="scenario-label">Инвестиция: 2.9B₽</div>
+                    <div class="scenario-label">Экономия: 68.4B₽</div>
+                </div>
+
+                <div class="scenario-box" onclick="switchScenario('E')">
+                    <div class="scenario-name">Scenario E<br>Tech-Only</div>
+                    <div class="scenario-roi">8.4x</div>
+                    <div class="scenario-label">Инвестиция: 6.5B₽</div>
+                    <div class="scenario-label">Экономия: 155B₽</div>
+                </div>
+
+                <div class="scenario-box recommended" onclick="switchScenario('B')">
+                    <div class="scenario-name">Scenario B ⭐<br>Comprehensive</div>
+                    <div class="scenario-roi">12.7x</div>
+                    <div class="scenario-label">Инвестиция: 8.5B₽</div>
+                    <div class="scenario-label">Экономия: 200B₽</div>
+                </div>
+
+                <div class="scenario-box" onclick="switchScenario('C')">
+                    <div class="scenario-name">Scenario C<br>Transformational</div>
+                    <div class="scenario-roi">10.0x</div>
+                    <div class="scenario-label">Инвестиция: 10.5B₽</div>
+                    <div class="scenario-label">Экономия: 300B₽</div>
+                </div>
+            </div>
+
+            <div id="scenarioDetails"></div>
+
+            <div class="chart-container">
+                <canvas id="scenarioChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Quarterly Trajectory -->
+        <div class="section-card">
+            <div class="section-header">
+                <i class="fas fa-calendar-alt"></i>
+                <h2>Квартальная динамика KPI (Scenario B)</h2>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="quarterlyChart"></canvas>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Квартал</th>
+                        <th>Контакт (%)</th>
+                        <th>Убыток (млн₽)</th>
+                        <th>Восстановление (млрд₽)</th>
+                        <th>2FA (%)</th>
+                        <th>Обнаружение (ч)</th>
+                        <th>Доверие (%)</th>
+                    </tr>
+                </thead>
+                <tbody id="quarterlyTable"></tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-logo">
+            <i class="fas fa-university"></i> ЦЕНТРАЛЬНЫЙ БАНК РОССИЙСКОЙ ФЕДЕРАЦИИ
+        </div>
+        <div class="footer-text">
+            © 2026 Банк России. Все права защищены.<br>
+            107016, Москва, ул. Неглинная, 12<br>
+            Конфиденциально. Для служебного пользования. Отчет №2025-AF-77<br>
+            Дата подготовки: 18 января 2026 г. | Исполнитель: Медяник С.И.
+        </div>
+    </footer>
+
+    <script>
+        // ===== DATA =====
+
+        const channels = [
+            { name: "Телефон/СМС", attempts: "54.6%", penetration: "83.1%", conversion: "27.5%", loss: "42.7k₽", risk: "Критический", trend: "+18%" },
+            { name: "Мессенджеры", attempts: "16.1%", penetration: "28.7%", conversion: "35.2%", loss: "55-120k₽", risk: "Высокий", trend: "+22%" },
+            { name: "Социальные сети", attempts: "12.1%", penetration: "18.8%", conversion: "22.1%", loss: "25-75k₽", risk: "Средний", trend: "Стабильно" },
+            { name: "Поддельные сайты", attempts: "4.8%", penetration: "5.9%", conversion: "41.3%", loss: "50-200k₽", risk: "Высокий", trend: "-5%" },
+            { name: "Госуслуги (deepfake)", attempts: "3.8%", penetration: "12.7%", conversion: "18.4%", loss: "15-60k₽", risk: "Средний", trend: "+15%" },
+            { name: "Вирусы/ПО", attempts: "3.3%", penetration: "3.2%", conversion: "52.1%", loss: "100-500k₽", risk: "Экстремальный", trend: "-8%" }
+        ];
+
+        const profiles = [
+            {
+                id: 1,
+                name: "Напряженный профессионал",
+                icon: "briefcase",
+                percent: 35,
+                age: "25-44 года",
+                income: "150-400k₽/мес",
+                location: "Москва, СПб (75%)",
+                avgLoss: "85k₽",
+                recovery: "8%",
+                roi: "5.2x",
+                risk: "Средний",
+                factors: ["Спешка и многозадачность", "Доверие к авторитету (звонки из банка)", "Слабая проверка SMS-ссылок", "Работа во время финансовых операций"],
+                cumLoss: "187.4 млрд₽ (35% от всех убытков)"
+            },
+            {
+                id: 2,
+                name: "Изолированный пожилой",
+                icon: "user",
+                percent: 25,
+                age: "55-80 лет",
+                income: "30-100k₽/мес",
+                location: "Провинции (65%)",
+                avgLoss: "45k₽",
+                recovery: "22%",
+                roi: "8.3x ⭐",
+                risk: "Высокий",
+                factors: ["Низкая цифровая грамотность", "Эмоциональная уязвимость", "Одиночество (72%)", "Схема 'внук в беде' (45% атак)"],
+                cumLoss: "95.4 млрд₽ (20% от всех убытков)"
+            },
+            {
+                id: 3,
+                name: "Самоуверенная молодежь",
+                icon: "graduation-cap",
+                percent: 18,
+                age: "18-30 лет",
+                income: "50-300k₽/мес",
+                location: "Города (85%)",
+                avgLoss: "250k₽",
+                recovery: "12%",
+                roi: "6.8x",
+                risk: "Средний",
+                factors: ["Переоценка собственных навыков", "FOMO (Fear of Missing Out)", "Много личной информации в соцсетях", "Крипто-инвестиции в Telegram"],
+                cumLoss: "123.7 млрд₽ (26% от всех убытков)"
+            },
+            {
+                id: 4,
+                name: "Кредитная ловушка",
+                icon: "credit-card",
+                percent: 12,
+                age: "35-55 лет",
+                income: "20-80k₽/мес",
+                location: "Провинции (60%)",
+                avgLoss: "400k₽",
+                recovery: "3%",
+                roi: "4.2x",
+                risk: "Критический",
+                factors: ["Финансовое отчаяние", "Манипулируемость", "Множественные долги", "Схема 'чудо-заработок' (WFH)"],
+                cumLoss: "178.3 млрд₽ (37% - МАКСИМУМ)"
+            },
+            {
+                id: 5,
+                name: "Неумышленная жертва",
+                icon: "bug",
+                percent: 10,
+                age: "Любой",
+                income: "Любой",
+                location: "Любая",
+                avgLoss: "Переменный",
+                recovery: "18%",
+                roi: "9.1x ⭐",
+                risk: "Низкий",
+                factors: ["Устаревший антивирус", "Отсутствие резервных копий", "Вирус через пиратский контент", "Ransomware на рабочем компьютере"],
+                cumLoss: "Варьируется"
+            }
+        ];
+
+        const scenarios = {
+            D: {
+                name: "Scenario D: Minimal (3 месяца)",
+                investment: "1.5 млрд₽",
+                saved: "17.4 млрд₽",
+                roi: "2.6x",
+                breakeven: "3 месяца",
+                success: "98%",
+                features: ["Образовательные кампании", "Горячая линия базовая"],
+                contactReduction: "36.7% → 35.5%",
+                color: "#94A3B8"
+            },
+            A: {
+                name: "Scenario A: Quick Wins (6 месяцев)",
+                investment: "2.9 млрд₽",
+                saved: "68.4 млрд₽",
+                roi: "23.6x 🏆",
+                breakeven: "1.5 месяца",
+                success: "95%",
+                features: ["2FA внедрение (50 приложений)", "Triage система (24ч)", "ТВ/радио образование", "Горячая линия 1-800-MOSHENNSTVO"],
+                contactReduction: "36.7% → 33.0%",
+                color: "#FACC15"
+            },
+            E: {
+                name: "Scenario E: Tech-Only (12 месяцев)",
+                investment: "6.5 млрд₽",
+                saved: "155 млрд₽",
+                roi: "8.4x",
+                breakeven: "6 месяцев",
+                success: "80%",
+                features: ["2FA + Triage + AI-фильтры", "Без образования", "Без микрокредитов", "Только технологии"],
+                contactReduction: "36.7% → 29.8%",
+                color: "#60A5FA"
+            },
+            B: {
+                name: "Scenario B: Comprehensive ⭐ (12 месяцев)",
+                investment: "8.5 млрд₽",
+                saved: "200 млрд₽",
+                roi: "12.7x",
+                breakeven: "8 месяцев",
+                success: "85%",
+                features: ["2FA + биометрия (90% приложений)", "AI-фильтры в мессенджерах", "Многоканальное образование", "Горячая линия расширенная", "Программа микрокредитования"],
+                contactReduction: "36.7% → 27.3%",
+                color: "#2563EB"
+            },
+            C: {
+                name: "Scenario C: Transformational (18-24 месяцев)",
+                investment: "10.5 млрд₽",
+                saved: "300 млрд₽",
+                roi: "10.0x",
+                breakeven: "10-12 месяцев",
+                success: "70%",
+                features: ["Все из Scenario B", "CBDC интеграция", "Blockchain аудит", "Quantum-ready криптография", "Биометрический паспорт"],
+                contactReduction: "36.7% → 18.5%",
+                color: "#10B981"
+            }
+        };
+
+        const quarterlyData = [
+            { quarter: "Q4 2025 (базовая)", contact: 36.7, loss: 10.1, recovery: 14.6, twofa: 35, detection: 48, trust: 62 },
+            { quarter: "Q1 2026", contact: 35.5, loss: 9.8, recovery: 16.2, twofa: 45, detection: 36, trust: 65 },
+            { quarter: "Q2 2026", contact: 33.2, loss: 9.2, recovery: 20.1, twofa: 58, detection: 24, trust: 68 },
+            { quarter: "Q3 2026", contact: 30.1, loss: 8.5, recovery: 25.3, twofa: 70, detection: 12, trust: 72 },
+            { quarter: "Q4 2026", contact: 27.3, loss: 7.8, recovery: 31.5, twofa: 82, detection: 4, trust: 76 },
+            { quarter: "Q1 2027", contact: 25.1, loss: 7.2, recovery: 38.2, twofa: 88, detection: 2, trust: 80 },
+            { quarter: "Q2 2027", contact: 23.4, loss: 6.8, recovery: 43.5, twofa: 95, detection: 1, trust: 83 }
+        ];
+
+        const featureImportance = [
+            { feature: "Информированность о безопасности", importance: 28.47 },
+            { feature: "Цифровая грамотность", importance: 21.56 },
+            { feature: "Опыт работы с банком", importance: 18.34 },
+            { feature: "Безопасность устройства", importance: 15.42 },
+            { feature: "Доверие к банку", importance: 11.02 },
+            { feature: "SMS-проверка привычка", importance: 3.19 },
+            { feature: "Другие факторы", importance: 2.00 }
+        ];
+
+        // ===== RENDER FUNCTIONS =====
+
+        function renderChannelsTable() {
+            const tbody = document.getElementById('channelsTable');
+            tbody.innerHTML = channels.map(ch => `
+                <tr>
+                    <td><strong>${ch.name}</strong></td>
+                    <td>${ch.attempts}</td>
+                    <td>${ch.penetration}</td>
+                    <td>${ch.conversion}</td>
+                    <td>${ch.loss}</td>
+                    <td><span class="risk-badge risk-${ch.risk === 'Критический' || ch.risk === 'Экстремальный' ? 'high' : (ch.risk === 'Высокий' ? 'medium' : 'low')}">${ch.risk}</span></td>
+                    <td style="color: ${ch.trend.includes('+') ? 'var(--cbr-red)' : (ch.trend.includes('-') ? 'var(--cbr-green)' : '#666')}"><strong>${ch.trend}</strong></td>
+                </tr>
+            `).join('');
+        }
+
+        function renderSankey() {
+            const data = {
+                type: "sankey",
+                orientation: "h",
+                node: {
+                    pad: 15,
+                    thickness: 20,
+                    line: { color: "#003D73", width: 0.5 },
+                    label: [
+                        "Попытки атак<br>598M",
+                        "Телефон/СМС", "Мессенджеры", "Соцсети", "Фишинг", "Госуслуги", "Вирусы",
+                        "Проникновение<br>219M",
+                        "Блокировка",
+                        "Убыток<br>98.4B₽",
+                        "Восстановление<br>14.6B₽"
+                    ],
+                    color: [
+                        "#005BAA",
+                        "#C8102E", "#FF6B2B", "#CF9F5D", "#FF6B2B", "#005BAA", "#8B0000",
+                        "#C8102E",
+                        "#008542",
+                        "#C8102E",
+                        "#008542"
+                    ]
+                },
+                link: {
+                    source: [0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 9],
+                    target: [1, 2, 3, 4, 5, 6, 7, 8, 7, 8, 7, 8, 7, 8, 7, 8, 7, 8, 9, 8, 10],
+                    value: [326, 96, 72, 29, 23, 20, 270, 56, 28, 68, 14, 58, 2, 27, 5, 18, 17, 3, 60, 159, 15],
+                    color: ["rgba(200, 16, 46, 0.3)", "rgba(255, 107, 43, 0.3)", "rgba(207, 159, 93, 0.3)",
+                        "rgba(255, 107, 43, 0.3)", "rgba(0, 91, 170, 0.3)", "rgba(139, 0, 0, 0.3)",
+                        "rgba(200, 16, 46, 0.2)", "rgba(0, 133, 66, 0.2)", "rgba(255, 107, 43, 0.2)",
+                        "rgba(0, 133, 66, 0.2)", "rgba(207, 159, 93, 0.2)", "rgba(0, 133, 66, 0.2)",
+                        "rgba(255, 107, 43, 0.2)", "rgba(0, 133, 66, 0.2)", "rgba(0, 91, 170, 0.2)",
+                        "rgba(0, 133, 66, 0.2)", "rgba(139, 0, 0, 0.2)", "rgba(0, 133, 66, 0.2)",
+                        "rgba(200, 16, 46, 0.4)", "rgba(0, 133, 66, 0.3)", "rgba(0, 133, 66, 0.5)"]
+                }
+            };
+
+            const layout = {
+                font: { size: 11, color: "#333", family: "PT Sans" },
+                paper_bgcolor: 'white',
+                plot_bgcolor: 'white',
+                margin: { l: 20, r: 20, b: 20, t: 20 }
+            };
+
+            Plotly.newPlot('sankeyChart', [data], layout, { displayModeBar: false, responsive: true });
+        }
+
+        let currentProfile = 1;
+
+        function renderProfiles() {
+            const tabs = document.getElementById('profileTabs');
+            const content = document.getElementById('profileContent');
+
+            tabs.innerHTML = profiles.map(p => `
+                <button class="tab ${p.id === currentProfile ? 'active' : ''}" onclick="switchProfile(${p.id})">
+                    <i class="fas fa-${p.icon}"></i> ${p.name} (${p.percent}%)
+                </button>
+            `).join('');
+
+            const profile = profiles.find(p => p.id === currentProfile);
+            content.innerHTML = `
+                <div class="profile-grid">
+                    <div>
+                        <h3 style="color: var(--cbr-blue-dark); margin-bottom: 1rem;">
+                            <i class="fas fa-${profile.icon}"></i> ${profile.name}
+                        </h3>
+                        <div class="profile-stat">
+                            <span class="profile-stat-label">Возраст</span>
+                            <span class="profile-stat-value">${profile.age}</span>
+                        </div>
+                        <div class="profile-stat">
+                            <span class="profile-stat-label">Доход</span>
+                            <span class="profile-stat-value">${profile.income}</span>
+                        </div>
+                        <div class="profile-stat">
+                            <span class="profile-stat-label">География</span>
+                            <span class="profile-stat-value">${profile.location}</span>
+                        </div>
+                        <div class="profile-stat">
+                            <span class="profile-stat-label">Средний убыток</span>
+                            <span class="profile-stat-value" style="color: var(--cbr-red)">${profile.avgLoss}</span>
+                        </div>
+                        <div class="profile-stat">
+                            <span class="profile-stat-label">Восстановление</span>
+                            <span class="profile-stat-value" style="color: var(--cbr-green)">${profile.recovery}</span>
+                        </div>
+                        <div class="profile-stat">
+                            <span class="profile-stat-label">ROI защиты</span>
+                            <span class="profile-stat-value" style="color: var(--cbr-gold)">${profile.roi}</span>
+                        </div>
+                        <div class="profile-stat">
+                            <span class="profile-stat-label">Уровень риска</span>
+                            <span class="profile-stat-value"><span class="risk-badge risk-${profile.risk === 'Критический' ? 'high' : (profile.risk === 'Высокий' ? 'medium' : 'low')}">${profile.risk}</span></span>
+                        </div>
+                        <div class="profile-stat">
+                            <span class="profile-stat-label">Кумулятивный ущерб</span>
+                            <span class="profile-stat-value" style="color: var(--cbr-red); font-size: 0.9rem">${profile.cumLoss}</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--cbr-blue-dark); margin-bottom: 1rem;"><i class="fas fa-exclamation-circle"></i> Факторы риска</h4>
+                        <ul style="list-style: none; padding: 0;">
+                            ${profile.factors.map(f => `<li style="padding: 0.5rem 0; border-bottom: 1px solid var(--cbr-border);"><i class="fas fa-chevron-right" style="color: var(--cbr-red); margin-right: 0.5rem;"></i>${f}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `;
+        }
+
+        function switchProfile(id) {
+            currentProfile = id;
+            renderProfiles();
+        }
+
+        let currentScenario = 'B';
+        let scenarioChart = null;
+
+        function renderScenarioDetails() {
+            const s = scenarios[currentScenario];
+            const details = document.getElementById('scenarioDetails');
+
+            details.innerHTML = `
+                <h3 style="color: var(--cbr-blue-dark); margin-bottom: 1rem;">${s.name}</h3>
+                <div class="profile-grid">
+                    <div>
+                        <div class="profile-stat">
+                            <span class="profile-stat-label">Инвестиция</span>
+                            <span class="profile-stat-value">${s.investment}</span>
+                        </div>
+                        <div class="profile-stat">
+                            <span class="profile-stat-label">Предотвращено убытков</span>
+                            <span class="profile-stat-value" style="color: var(--cbr-green)">${s.saved}</span>
+                        </div>
+                        <div class="profile-stat">
+                            <span class="profile-stat-label">ROI</span>
+                            <span class="profile-stat-value" style="color: var(--cbr-gold); font-size: 2rem">${s.roi}</span>
+                        </div>
+                        <div class="profile-stat">
+                            <span class="profile-stat-label">Окупаемость</span>
+                            <span class="profile-stat-value">${s.breakeven}</span>
+                        </div>
+                        <div class="profile-stat">
+                            <span class="profile-stat-label">Вероятность успеха</span>
+                            <span class="profile-stat-value">${s.success}</span>
+                        </div>
+                        <div class="profile-stat">
+                            <span class="profile-stat-label">Снижение контакта</span>
+                            <span class="profile-stat-value" style="color: var(--cbr-green)">${s.contactReduction}</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--cbr-blue-dark); margin-bottom: 1rem;"><i class="fas fa-cogs"></i> Компоненты программы</h4>
+                        <ul style="list-style: none; padding: 0;">
+                            ${s.features.map(f => `<li style="padding: 0.5rem 0; border-bottom: 1px solid var(--cbr-border);"><i class="fas fa-check-circle" style="color: var(--cbr-green); margin-right: 0.5rem;"></i>${f}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `;
+
+            updateScenarioChart();
+        }
+
+        function switchScenario(id) {
+            currentScenario = id;
+            renderScenarioDetails();
+        }
+
+        function updateScenarioChart() {
+            const ctx = document.getElementById('scenarioChart');
+
+            if (scenarioChart) {
+                scenarioChart.destroy();
+            }
+
+            const allScenarios = Object.keys(scenarios);
+            const investments = allScenarios.map(k => parseFloat(scenarios[k].investment));
+            const savings = allScenarios.map(k => parseFloat(scenarios[k].saved));
+            const rois = allScenarios.map(k => parseFloat(scenarios[k].roi.replace('x', '').replace(' 🏆', '').replace(' ⭐', '')));
+
+            scenarioChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: allScenarios.map(k => scenarios[k].name.split(' (')[0]),
+                    datasets: [
+                        {
+                            label: 'Инвестиция (млрд₽)',
+                            data: investments,
+                            backgroundColor: 'rgba(200, 16, 46, 0.7)',
+                            borderColor: '#C8102E',
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'Предотвращено убытков (млрд₽)',
+                            data: savings,
+                            backgroundColor: 'rgba(0, 133, 66, 0.7)',
+                            borderColor: '#008542',
+                            borderWidth: 2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                font: { family: 'PT Sans', size: 12 },
+                                color: '#333'
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 61, 115, 0.95)',
+                            titleFont: { family: 'PT Sans', size: 14 },
+                            bodyFont: { family: 'PT Sans', size: 12 },
+                            callbacks: {
+                                afterBody: function (context) {
+                                    const idx = context[0].dataIndex;
+                                    return `ROI: ${rois[idx]}x`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: 'rgba(0, 0, 0, 0.05)' },
+                            ticks: {
+                                font: { family: 'PT Sans' },
+                                color: '#666'
+                            }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: {
+                                font: { family: 'PT Sans' },
+                                color: '#666'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function renderFeatureImportance() {
+            const ctx = document.getElementById('featureImportanceChart');
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: featureImportance.map(f => f.feature),
+                    datasets: [{
+                        label: 'Важность признака (%)',
+                        data: featureImportance.map(f => f.importance),
+                        backgroundColor: 'rgba(0, 91, 170, 0.7)',
+                        borderColor: '#005BAA',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 61, 115, 0.95)',
+                            titleFont: { family: 'PT Sans', size: 12 },
+                            bodyFont: { family: 'PT Sans', size: 11 }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 30,
+                            grid: { color: 'rgba(0, 0, 0, 0.05)' },
+                            ticks: {
+                                font: { family: 'PT Sans', size: 10 },
+                                color: '#666'
+                            }
+                        },
+                        y: {
+                            grid: { display: false },
+                            ticks: {
+                                font: { family: 'PT Sans', size: 10 },
+                                color: '#666'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function renderQuarterlyTable() {
+            const tbody = document.getElementById('quarterlyTable');
+            tbody.innerHTML = quarterlyData.map((q, i) => `
+                <tr style="${i === 0 ? 'background: var(--cbr-blue-light); font-weight: 700;' : ''}">
+                    <td>${q.quarter}</td>
+                    <td>${q.contact}%</td>
+                    <td>${q.loss}</td>
+                    <td>${q.recovery}</td>
+                    <td>${q.twofa}%</td>
+                    <td>${q.detection}ч</td>
+                    <td>${q.trust}%</td>
+                </tr>
+            `).join('');
+        }
+
+        function renderQuarterlyChart() {
+            const ctx = document.getElementById('quarterlyChart');
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: quarterlyData.map(q => q.quarter),
+                    datasets: [
+                        {
+                            label: 'Контакт с мошенниками (%)',
+                            data: quarterlyData.map(q => q.contact),
+                            borderColor: '#C8102E',
+                            backgroundColor: 'rgba(200, 16, 46, 0.1)',
+                            tension: 0.4,
+                            fill: true,
+                            borderWidth: 3,
+                            pointRadius: 5,
+                            pointBackgroundColor: '#C8102E'
+                        },
+                        {
+                            label: 'Внедрение 2FA (%)',
+                            data: quarterlyData.map(q => q.twofa),
+                            borderColor: '#008542',
+                            backgroundColor: 'rgba(0, 133, 66, 0.1)',
+                            tension: 0.4,
+                            fill: true,
+                            borderWidth: 3,
+                            pointRadius: 5,
+                            pointBackgroundColor: '#008542'
+                        },
+                        {
+                            label: 'Доверие к банкам (%)',
+                            data: quarterlyData.map(q => q.trust),
+                            borderColor: '#005BAA',
+                            backgroundColor: 'rgba(0, 91, 170, 0.1)',
+                            tension: 0.4,
+                            fill: true,
+                            borderWidth: 3,
+                            pointRadius: 5,
+                            pointBackgroundColor: '#005BAA'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                font: { family: 'PT Sans', size: 12 },
+                                color: '#333'
+                            }
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            backgroundColor: 'rgba(0, 61, 115, 0.95)',
+                            titleFont: { family: 'PT Sans', size: 14 },
+                            bodyFont: { family: 'PT Sans', size: 12 }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            grid: { color: 'rgba(0, 0, 0, 0.05)' },
+                            ticks: {
+                                font: { family: 'PT Sans' },
+                                color: '#666',
+                                callback: value => value + '%'
+                            }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: {
+                                font: { family: 'PT Sans', size: 10 },
+                                color: '#666'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // ===== INIT =====
+        document.addEventListener('DOMContentLoaded', () => {
+            renderChannelsTable();
+            renderSankey();
+            renderProfiles();
+            renderScenarioDetails();
+            renderFeatureImportance();
+            renderQuarterlyTable();
+            renderQuarterlyChart();
+        });
+    </script>
+</body>
+
+</html>
