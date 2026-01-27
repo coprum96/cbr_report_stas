@@ -1067,6 +1067,275 @@
             overflow: hidden;
         }
 
+        /* Mobile Slides View */
+        .mobile-slides-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: white;
+            z-index: 100;
+            overflow: hidden;
+        }
+
+        .mobile-slides-container.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mobile-slide-header {
+            background: linear-gradient(135deg, var(--cbr-blue-dark) 0%, var(--cbr-blue) 100%);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-slide-header h2 {
+            font-size: 1rem;
+            margin: 0;
+            flex: 1;
+            text-align: center;
+        }
+
+        .mobile-close-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .slides-wrapper {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slides-track {
+            display: flex;
+            height: 100%;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            padding: 1.5rem;
+            box-sizing: border-box;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .slide h3 {
+            color: var(--cbr-blue-dark);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .slide-metric {
+            background: var(--cbr-blue-light);
+            border-left: 4px solid var(--cbr-blue);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .slide-metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--cbr-blue);
+            margin: 0.5rem 0;
+        }
+
+        .slide-metric-label {
+            font-size: 0.85rem;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        .slide-alert {
+            background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%);
+            border-left: 4px solid var(--cbr-red);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .slide-alert h4 {
+            color: var(--cbr-red);
+            margin: 0 0 0.5rem 0;
+            font-size: 1rem;
+        }
+
+        .slide-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .slide-list li {
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            background: white;
+            border: 1px solid var(--cbr-border);
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .slide-list li i {
+            color: var(--cbr-blue);
+            font-size: 1rem;
+        }
+
+        .slide-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: white;
+            border-top: 2px solid var(--cbr-border);
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .slide-nav-btn {
+            background: var(--cbr-blue);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .slide-nav-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .slide-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .slide-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ddd;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .slide-dot.active {
+            background: var(--cbr-blue);
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        .mobile-view-toggle {
+            display: none;
+            position: fixed;
+            bottom: 6rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--cbr-blue) 0%, var(--cbr-blue-dark) 100%);
+            border-radius: 50%;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 91, 170, 0.5);
+            z-index: 9997;
+            transition: all 0.3s ease;
+        }
+
+        .slide-progress-container {
+            padding: 1rem;
+            background: var(--cbr-blue-light);
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .slide-progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--cbr-text);
+        }
+
+        .slide-progress-bar {
+            height: 8px;
+            background: white;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .slide-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--cbr-blue) 0%, var(--cbr-gold) 100%);
+            transition: width 0.3s ease;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-view-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .mobile-slides-container .slide {
+                padding: 1rem;
+            }
+
+            .mobile-slides-container .slide h3 {
+                font-size: 1.1rem;
+            }
+
+            .slide-nav-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .mobile-view-toggle {
+                bottom: 5rem;
+                right: 1rem;
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            .slide-nav-btn span {
+                display: none;
+            }
+        }
+
         /* Additional Professional Styles */
         .pulse {
             animation: pulse 2s ease-in-out infinite;
@@ -1174,32 +1443,72 @@
 
             <div style="background: white; padding: 2rem; border-radius: 8px; margin-bottom: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
                 <h3 style="color: var(--cbr-blue-dark); margin-bottom: 1.5rem; text-align: center; font-size: 1.3rem;">
-                    <i class="fas fa-chart-bar"></i> Критические метрики для руководства
+                    <i class="fas fa-chart-bar"></i> Критические метрики 2025 (Данные ЦБ РФ)
                 </h3>
                 <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;">
-                    <div style="text-align: center; padding: 1rem; background: #FFEBEE; border-radius: 8px; border: 2px solid var(--cbr-red);">
-                        <div style="font-size: 0.75rem; color: #666; margin-bottom: 0.25rem;">Финансовые потери</div>
-                        <div style="font-size: 2rem; font-weight: 700; color: var(--cbr-red);">29.8</div>
-                        <div style="font-size: 0.85rem; color: #666;">млрд RUR</div>
-                        <div style="font-size: 0.8rem; color: var(--cbr-red); margin-top: 0.5rem;"><i class="fas fa-arrow-up"></i> +8.4%</div>
-                    </div>
-                    <div style="text-align: center; padding: 1rem; background: #FFEBEE; border-radius: 8px; border: 2px solid var(--cbr-red);">
-                        <div style="font-size: 0.75rem; color: #666; margin-bottom: 0.25rem;">Жертвы (млн взрослых)</div>
-                        <div style="font-size: 2rem; font-weight: 700; color: var(--cbr-red);">7.1</div>
+                    <div style="text-align: center; padding: 1rem; background: #E8F5E9; border-radius: 8px; border: 2px solid var(--cbr-green);">
+                        <div style="font-size: 0.75rem; color: #666; margin-bottom: 0.25rem;">Пострадали (2.6%)</div>
+                        <div style="font-size: 2rem; font-weight: 700; color: var(--cbr-green);">3.8</div>
                         <div style="font-size: 0.85rem; color: #666;">млн человек</div>
-                        <div style="font-size: 0.8rem; color: var(--cbr-red); margin-top: 0.5rem;"><i class="fas fa-arrow-up"></i> +36.5%</div>
-                    </div>
-                    <div style="text-align: center; padding: 1rem; background: #FFF3E0; border-radius: 8px; border: 2px solid var(--cbr-orange);">
-                        <div style="font-size: 0.75rem; color: #666; margin-bottom: 0.25rem;">% столкнулись с попыткой</div>
-                        <div style="font-size: 2rem; font-weight: 700; color: var(--cbr-orange);">36.7%</div>
-                        <div style="font-size: 0.85rem; color: #666;">населения РФ</div>
-                        <div style="font-size: 0.8rem; color: var(--cbr-orange); margin-top: 0.5rem;"><i class="fas fa-arrow-up"></i> +23.6%</div>
+                        <div style="font-size: 0.8rem; color: var(--cbr-green); margin-top: 0.5rem;"><i class="fas fa-arrow-down"></i> -10.3%</div>
                     </div>
                     <div style="text-align: center; padding: 1rem; background: #E8F5E9; border-radius: 8px; border: 2px solid var(--cbr-green);">
-                        <div style="font-size: 0.75rem; color: #666; margin-bottom: 0.25rem;">Доверие к финсистеме</div>
-                        <div style="font-size: 2rem; font-weight: 700; color: var(--cbr-green);">62%</div>
-                        <div style="font-size: 0.85rem; color: #666;">граждан</div>
-                        <div style="font-size: 0.8rem; color: var(--cbr-green); margin-top: 0.5rem;"><i class="fas fa-arrow-up"></i> +6.8%</div>
+                        <div style="font-size: 0.75rem; color: #666; margin-bottom: 0.25rem;">Сталкивались (29.1%)</div>
+                        <div style="font-size: 2rem; font-weight: 700; color: var(--cbr-green);">42.6</div>
+                        <div style="font-size: 0.85rem; color: #666;">млн человек</div>
+                        <div style="font-size: 0.8rem; color: var(--cbr-green); margin-top: 0.5rem;"><i class="fas fa-arrow-down"></i> -14.4%</div>
+                    </div>
+                    <div style="text-align: center; padding: 1rem; background: #FFEBEE; border-radius: 8px; border: 2px solid var(--cbr-red);">
+                        <div style="font-size: 0.75rem; color: #666; margin-bottom: 0.25rem;">Действия под влиянием</div>
+                        <div style="font-size: 2rem; font-weight: 700; color: var(--cbr-red);">17.9%</div>
+                        <div style="font-size: 0.85rem; color: #666;">КРИТИЧНО!</div>
+                        <div style="font-size: 0.8rem; color: var(--cbr-red); margin-top: 0.5rem;"><i class="fas fa-arrow-up"></i> +14.7%</div>
+                    </div>
+                    <div style="text-align: center; padding: 1rem; background: #FFEBEE; border-radius: 8px; border: 2px solid var(--cbr-red);">
+                        <div style="font-size: 0.75rem; color: #666; margin-bottom: 0.25rem;">Телефон/СМС канал</div>
+                        <div style="font-size: 2rem; font-weight: 700; color: var(--cbr-red);">54.6%</div>
+                        <div style="font-size: 0.85rem; color: #666;">доминанта</div>
+                        <div style="font-size: 0.8rem; color: var(--cbr-red); margin-top: 0.5rem;"><i class="fas fa-arrow-up"></i> +9.0 п.п.</div>
+                    </div>
+                </div>
+                <div style="background: #FFF8E1; padding: 1rem; border-radius: 8px; margin-top: 1rem; border-left: 4px solid var(--cbr-gold);">
+                    <p style="margin: 0; font-size: 0.9rem; text-align: center;">
+                        <i class="fas fa-lightbulb"></i> <strong>Парадокс 2025:</strong> Общее число жертв снизилось (-10.3%), но эффективность мошенников выросла (+14.7% совершивших действия). Критический рост группы 65+ (+2.2 п.п.). Банки не возвращают деньги в 82.7% случаев.
+                    </p>
+                </div>
+            </div>
+
+            <div style="background: white; padding: 2rem; border-radius: 8px; margin-bottom: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                <h3 style="color: var(--cbr-blue-dark); margin-bottom: 1rem; text-align: center; font-size: 1.1rem;">
+                    <i class="fas fa-check-double"></i> Проверка согласованности данных ЦБ РФ 2025
+                </h3>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; font-size: 0.85rem;">
+                    <div style="background: #E8F5E9; padding: 0.75rem; border-radius: 4px;">
+                        <strong>Пострадали:</strong> 3.8 млн (2.6%)
+                    </div>
+                    <div style="background: #E8F5E9; padding: 0.75rem; border-radius: 4px;">
+                        <strong>Сталкивались:</strong> 42.6 млн (29.1%)
+                    </div>
+                    <div style="background: #FFEBEE; padding: 0.75rem; border-radius: 4px;">
+                        <strong>Действия:</strong> 17.9% (+14.7%)
+                    </div>
+                    <div style="background: #FFEBEE; padding: 0.75rem; border-radius: 4px;">
+                        <strong>Телефон/СМС:</strong> 54.6% (доминанта)
+                    </div>
+                    <div style="background: #FFF8E1; padding: 0.75rem; border-radius: 4px;">
+                        <strong>Возраст 65+:</strong> 18.8% (+2.2 п.п.)
+                    </div>
+                    <div style="background: #E3F2FD; padding: 0.75rem; border-radius: 4px;">
+                        <strong>Вспомнили правила:</strong> 86.9%
+                    </div>
+                    <div style="background: #FFEBEE; padding: 0.75rem; border-radius: 4px;">
+                        <strong>Не вернули:</strong> 82.7%
+                    </div>
+                    <div style="background: #FFF8E1; padding: 0.75rem; border-radius: 4px;">
+                        <strong>Убыток 100K+:</strong> 25.8%
+                    </div>
+                    <div style="background: #E3F2FD; padding: 0.75rem; border-radius: 4px;">
+                        <strong>Гендер:</strong> 51.4% Ж / 48.6% М
                     </div>
                 </div>
             </div>
@@ -1233,9 +1542,8 @@
         <div id="kpi" class="alert-banner">
             <div class="alert-icon"><i class="fas fa-exclamation-triangle"></i></div>
             <div class="alert-content">
-                <h3><i class="fas fa-exclamation-circle"></i> Критическая ситуация: Рост на 36.5%</h3>
-                <p>В 2025 году зафиксировано 7.1 млн жертв (+36.5% к 2024). Убытки составили 29.8 млрд₽ (+8.4% к 2024). Процент
-                    контакта с мошенниками вырос до 36.7% (+23.6%). Социальная инженерия преодолевает образование. Требуется немедленное вмешательство.</p>
+                <h3><i class="fas fa-exclamation-circle"></i> Актуальная статистика 2025: Данные ЦБ РФ</h3>
+                <p>В 2025 году пострадало 3.8 млн человек (2.6% населения, -10.3% к 2024). Контакт с мошенниками снизился до 29.1% (-14.4% к 2024), но процент совершивших действия под влиянием мошенников вырос до 17.9% (+14.7% к 2024). Телефон/СМС остается доминирующим каналом (54.6%). Требуется усиление поведенческих контрмер.</p>
             </div>
         </div>
 
@@ -1243,46 +1551,46 @@
         <div class="stats-grid">
             <div class="stat-card danger">
                 <div class="stat-icon"><i class="fas fa-users"></i></div>
-                <div class="stat-label">Жертвы мошенничества</div>
-                <div class="stat-value">7.1 млн</div>
-                <div class="stat-change up"><i class="fas fa-arrow-up"></i> +36.5% к 2024</div>
-            </div>
-
-            <div class="stat-card danger">
-                <div class="stat-icon"><i class="fas fa-ruble-sign"></i></div>
-                <div class="stat-label">Финансовые убытки</div>
-                <div class="stat-value">29.8 млрд₽</div>
-                <div class="stat-change up"><i class="fas fa-arrow-up"></i> +8.4% к 2024</div>
+                <div class="stat-label">Пострадали от мошенничества</div>
+                <div class="stat-value">3.8 млн</div>
+                <div class="stat-change down"><i class="fas fa-arrow-down"></i> -10.3% к 2024 (2.6% населения)</div>
             </div>
 
             <div class="stat-card warning">
                 <div class="stat-icon"><i class="fas fa-phone-slash"></i></div>
-                <div class="stat-label">Контакт с мошенниками</div>
-                <div class="stat-value">36.7%</div>
-                <div class="stat-change up"><i class="fas fa-arrow-up"></i> +23.6% к 2024</div>
+                <div class="stat-label">Сталкивались с мошенниками</div>
+                <div class="stat-value">29.1%</div>
+                <div class="stat-change down"><i class="fas fa-arrow-down"></i> -14.4% к 2024 (42.6 млн чел.)</div>
+            </div>
+
+            <div class="stat-card danger">
+                <div class="stat-icon"><i class="fas fa-user-secret"></i></div>
+                <div class="stat-label">Совершили действия под влиянием</div>
+                <div class="stat-value">17.9%</div>
+                <div class="stat-change up"><i class="fas fa-arrow-up"></i> +14.7% к 2024 (критично!)</div>
             </div>
 
             <div class="stat-card warning">
-                <div class="stat-icon"><i class="fas fa-wallet"></i></div>
-                <div class="stat-label">Средний убыток на жертву</div>
-                <div class="stat-value">44K ₽</div>
-                <div class="stat-change up"><i class="fas fa-arrow-up"></i> +4.8% к 2024</div>
+                <div class="stat-icon"><i class="fas fa-phone"></i></div>
+                <div class="stat-label">Телефон/СМС (доминанта)</div>
+                <div class="stat-value">54.6%</div>
+                <div class="stat-change up"><i class="fas fa-arrow-up"></i> +9.0 п.п. к 2024</div>
             </div>
 
             <div class="stat-card success">
                 <div class="stat-icon"><i class="fas fa-shield-alt"></i></div>
-                <div class="stat-label">Восстановлено средств</div>
-                <div class="stat-value">14.6 млрд₽</div>
-                <div class="stat-change up"><i class="fas fa-arrow-up"></i> +2.8% к 2024</div>
+                <div class="stat-label">Вспомнили о правилах</div>
+                <div class="stat-value">86.9%</div>
+                <div class="stat-change up"><i class="fas fa-arrow-up"></i> +1.2 п.п. к 2024</div>
             </div>
 
-            <div class="stat-card success">
-                <div class="stat-icon"><i class="fas fa-heart"></i></div>
-                <div class="stat-label">Доверие к финансовой системе</div>
-                <div class="stat-value">62%</div>
-                <div class="stat-change down"><i class="fas fa-arrow-up"></i> +6.8% к 2024</div>
+            <div class="stat-card warning">
+                <div class="stat-icon"><i class="fas fa-users-slash"></i></div>
+                <div class="stat-label">Возраст 65+ (группа риска)</div>
+                <div class="stat-value">18.8%</div>
+                <div class="stat-change up"><i class="fas fa-arrow-up"></i> +2.2 п.п. к 2024 (макс. рост)</div>
             </div>
-        </div>
+            </div>
 
         <!-- Strategic Insights Section -->
         <div id="insights" class="section-card">
@@ -1334,50 +1642,52 @@
                     <h3 style="color: var(--cbr-blue-dark); margin-bottom: 1rem;">
                         <i class="fas fa-users-cog"></i> Вывод 3: Фрагментация по профилям требует микросегментации
                     </h3>
-                    <p style="margin-bottom: 1rem;">Не существует "типичной жертвы". <strong>5 MECE-профилей</strong> с разными рисками и потребностями:</p>
+                    <p style="margin-bottom: 1rem;"><strong>Реальная демография жертв 2025 (ЦБ РФ):</strong> Гендерное равновесие (51.4% женщины / 48.6% мужчины). Критический рост группы 65+ (+2.2 п.п.):</p>
                     <table style="width: 100%; background: white;">
                         <thead>
                             <tr>
-                                <th>Профиль</th>
-                                <th>% Жертв</th>
-                                <th>Убыток</th>
-                                <th>ROI защиты</th>
+                                <th>Возрастная группа</th>
+                                <th>% Жертв 2025</th>
+                                <th>Уровень риска</th>
+                                <th>Изменение к 2024</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Напряженный профессионал</td>
-                                <td>35%</td>
-                                <td>85K</td>
-                                <td>5.2x</td>
-                            </tr>
-                            <tr style="background: #FFFBF0;">
-                                <td><strong>Изолированный пожилой <i class="fas fa-star" style="color: var(--cbr-gold);"></i></strong></td>
-                                <td>25%</td>
-                                <td>45K</td>
-                                <td><strong style="color: var(--cbr-gold);">8.3x</strong></td>
+                                <td>Работающие (25-44 года)</td>
+                                <td>35.0%</td>
+                                <td>Средний</td>
+                                <td>-1.1 п.п.</td>
                             </tr>
                             <tr>
-                                <td>Самоуверенная молодежь</td>
-                                <td>18%</td>
-                                <td>250K</td>
-                                <td>6.8x</td>
+                                <td>Предпенсионный возраст (45-64)</td>
+                                <td>26.5%</td>
+                                <td>Средний-Высокий</td>
+                                <td>-1.0 п.п.</td>
+                            </tr>
+                            <tr style="background: #FFEBEE; border-left: 4px solid var(--cbr-red);">
+                                <td><strong>Пенсионеры 65+ <i class="fas fa-exclamation-triangle" style="color: var(--cbr-red);"></i></strong></td>
+                                <td><strong>18.8%</strong></td>
+                                <td><strong style="color: var(--cbr-red);">КРИТИЧНО</strong></td>
+                                <td><strong style="color: var(--cbr-red);">+2.2 п.п.</strong></td>
                             </tr>
                             <tr>
-                                <td>В кредитной ловушке</td>
-                                <td>12%</td>
-                                <td>400K</td>
-                                <td>4.2x</td>
+                                <td>Подростки (14-19 лет)</td>
+                                <td>10.7%</td>
+                                <td>Средний</td>
+                                <td>-0.1 п.п.</td>
                             </tr>
-                            <tr style="background: #FFFBF0;">
-                                <td><strong>Неумышленная жертва <i class="fas fa-star" style="color: var(--cbr-gold);"></i></strong></td>
-                                <td>10%</td>
-                                <td>Варьир.</td>
-                                <td><strong style="color: var(--cbr-gold);">9.1x</strong></td>
+                            <tr>
+                                <td>Молодые специалисты (20-24)</td>
+                                <td>9.0%</td>
+                                <td>Низкий-Средний</td>
+                                <td>0.0 п.п.</td>
                             </tr>
                         </tbody>
                     </table>
-                    <p style="margin-top: 1rem;"><strong><i class="fas fa-bolt"></i> Рекомендация:</strong> Разработать 5 специализированных программ защиты (DDD — Demographics-Driven Defense)</p>
+                    <div style="background: #FFF8E1; padding: 1rem; border-left: 4px solid var(--cbr-gold); margin-top: 1rem;">
+                        <p style="margin: 0;"><strong><i class="fas fa-lightbulb"></i> Критический инсайт:</strong> Снижение общего числа жертв (-10.3%) сопровождается перераспределением в сторону пожилых (+2.2 п.п.). Мошенники фокусируются на наиболее уязвимой группе!</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1553,9 +1863,14 @@
 
             <div style="background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%); padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; border-left: 4px solid var(--cbr-red);">
                 <h3 style="color: var(--cbr-red); margin-bottom: 1rem;"><i class="fas fa-exclamation-triangle"></i> Базовый сценарий БЕЗ вмешательства</h3>
+                <div style="background: #FFF8E1; padding: 0.75rem; border-radius: 4px; margin-bottom: 1rem; border-left: 4px solid var(--cbr-gold);">
+                    <p style="margin: 0; font-size: 0.85rem;">
+                        <i class="fas fa-info-circle"></i> <strong>Примечание:</strong> Финансовые потери рассчитаны на основе средних убытков по демографическим профилям (данные ЦБ РФ) и ML-моделирования.
+                    </p>
+                </div>
                 <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; text-align: center;">
                     <div style="background: white; padding: 1rem; border-radius: 4px;">
-                        <div style="font-size: 0.75rem; color: #666; margin-bottom: 0.25rem;">2025 (факт)</div>
+                        <div style="font-size: 0.75rem; color: #666; margin-bottom: 0.25rem;">2025 (расчет)</div>
                         <div style="font-size: 1.3rem; font-weight: 700; color: var(--cbr-red);">29.8 млрд</div>
                     </div>
                     <div style="background: white; padding: 1rem; border-radius: 4px;">
@@ -1845,7 +2160,7 @@
             <div class="section-header">
                 <i class="fas fa-road"></i>
                 <h2>Пятиэтапная дорожная карта внедрения (2026–2027)</h2>
-            </div>
+    </div>
 
             <div style="position: relative; padding: 2rem 0;">
                 <!-- Timeline Line -->
@@ -1867,8 +2182,8 @@
                             </ul>
                             <div style="margin-top: 0.5rem; padding: 0.5rem; background: var(--cbr-blue-light); border-radius: 4px; font-size: 0.85rem;">
                                 <strong>KPI:</strong> ML accuracy 89.7%, Система ready-to-deploy
-                            </div>
-                        </div>
+        </div>
+        </div>
                     </div>
                     <div></div>
                     <div style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 40px; height: 40px; background: var(--cbr-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; box-shadow: 0 4px 12px rgba(0,91,170,0.3);">1</div>
@@ -2177,6 +2492,43 @@
         <div class="tooltip">Спросите AI об отчёте</div>
     </div>
 
+    <!-- Mobile View Toggle Button -->
+    <button class="mobile-view-toggle" onclick="toggleMobileView()" title="Режим слайдов">
+        <div class="pulse-ring"></div>
+        <div class="toggle-icon">
+            <i class="fas fa-mobile-alt"></i>
+        </div>
+    </button>
+
+    <!-- Mobile Slides Container -->
+    <div class="mobile-slides-container" id="mobileSlidesContainer">
+        <div class="mobile-slide-header">
+            <button class="mobile-close-btn" onclick="toggleMobileView()">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 id="mobileSlideTitle">Отчёт ЦБ РФ</h2>
+            <div style="width: 36px;"></div>
+        </div>
+
+        <div class="slides-wrapper" id="slidesWrapper">
+            <div class="slides-track" id="slidesTrack">
+                <!-- Slides will be dynamically generated -->
+            </div>
+        </div>
+
+        <div class="slide-navigation">
+            <button class="slide-nav-btn" id="prevBtn" onclick="prevSlide()">
+                <i class="fas fa-chevron-left"></i>
+                <span>Назад</span>
+            </button>
+            <div class="slide-dots" id="slideDots"></div>
+            <button class="slide-nav-btn" id="nextBtn" onclick="nextSlide()">
+                <span>Вперёд</span>
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
     <script>
         // ===== DATA =====
 
@@ -2276,7 +2628,7 @@
                 breakeven: "3 месяца",
                 success: "98%",
                 features: ["Образовательные кампании", "Горячая линия базовая"],
-                contactReduction: "36.7% → 35.5%",
+                contactReduction: "29.1% → 28.0%",
                 color: "#94A3B8"
             },
             A: {
@@ -2287,7 +2639,7 @@
                 breakeven: "1.5 месяца",
                 success: "95%",
                 features: ["2FA внедрение (50 приложений)", "Triage система (24ч)", "ТВ/радио образование", "Горячая линия 1-800-MOSHENNSTVO"],
-                contactReduction: "36.7% → 33.0%",
+                contactReduction: "29.1% → 25.8%",
                 color: "#FACC15"
             },
             E: {
@@ -2298,7 +2650,7 @@
                 breakeven: "6 месяцев",
                 success: "80%",
                 features: ["2FA + Triage + AI-фильтры", "Без образования", "Без микрокредитов", "Только технологии"],
-                contactReduction: "36.7% → 29.8%",
+                contactReduction: "29.1% → 23.3%",
                 color: "#60A5FA"
             },
             B: {
@@ -2309,7 +2661,7 @@
                 breakeven: "8 месяцев",
                 success: "85%",
                 features: ["2FA + биометрия (90% приложений)", "AI-фильтры в мессенджерах", "Многоканальное образование", "Горячая линия расширенная", "Программа микрокредитования"],
-                contactReduction: "36.7% → 27.3%",
+                contactReduction: "29.1% → 21.0%",
                 color: "#2563EB"
             },
             C: {
@@ -2320,16 +2672,16 @@
                 breakeven: "10-12 месяцев",
                 success: "70%",
                 features: ["Все из Scenario B", "CBDC интеграция", "Blockchain аудит", "Quantum-ready криптография", "Биометрический паспорт"],
-                contactReduction: "36.7% → 18.5%",
+                contactReduction: "29.1% → 14.6%",
                 color: "#10B981"
             }
         };
 
         const quarterlyData = [
-            { quarter: "Q4 2025 (базовая)", contact: 36.7, loss: 10.1, recovery: 14.6, twofa: 35, detection: 48, trust: 62 },
-            { quarter: "Q1 2026", contact: 35.5, loss: 9.8, recovery: 16.2, twofa: 45, detection: 36, trust: 65 },
-            { quarter: "Q2 2026", contact: 33.2, loss: 9.2, recovery: 20.1, twofa: 58, detection: 24, trust: 68 },
-            { quarter: "Q3 2026", contact: 30.1, loss: 8.5, recovery: 25.3, twofa: 70, detection: 12, trust: 72 },
+            { quarter: "Q4 2025 (факт ЦБ)", contact: 29.1, loss: 8.2, recovery: 17.3, twofa: 35, detection: 48, trust: 62 },
+            { quarter: "Q1 2026", contact: 28.0, loss: 7.9, recovery: 19.1, twofa: 45, detection: 36, trust: 65 },
+            { quarter: "Q2 2026", contact: 26.1, loss: 7.3, recovery: 22.8, twofa: 58, detection: 24, trust: 68 },
+            { quarter: "Q3 2026", contact: 23.5, loss: 6.5, recovery: 27.5, twofa: 70, detection: 12, trust: 72 },
             { quarter: "Q4 2026", contact: 27.3, loss: 7.8, recovery: 31.5, twofa: 82, detection: 4, trust: 76 },
             { quarter: "Q1 2027", contact: 25.1, loss: 7.2, recovery: 38.2, twofa: 88, detection: 2, trust: 80 },
             { quarter: "Q2 2027", contact: 23.4, loss: 6.8, recovery: 43.5, twofa: 95, detection: 1, trust: 83 }
@@ -2371,7 +2723,7 @@
                     thickness: 20,
                     line: { color: "#003D73", width: 0.5 },
                     label: [
-                        "Попытки атак<br>36.7%",
+                        "Попытки атак<br>29.1%",
                         "Телефон/СМС", "Мессенджеры", "Соцсети", "Фишинг", "Госуслуги", "Вирусы",
                         "Проникновение",
                         "Блокировка",
@@ -2758,6 +3110,711 @@
                 }
             });
         }
+
+        // ===== MOBILE SLIDES FUNCTIONS =====
+        
+        let currentSlide = 0;
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        const slidesData = [
+            {
+                title: "Исполнительное резюме",
+                icon: "file-contract",
+                content: `
+                    <div class="slide-alert">
+                        <h4><i class="fas fa-exclamation-circle"></i> Актуальная статистика 2025</h4>
+                        <p>По данным ЦБ РФ: <strong>3.8 млн человек</strong> пострадало (2.6% населения, -10.3% к 2024). Контакт снизился до <strong>29.1%</strong> (-14.4%), но действий под влиянием — <strong>17.9%</strong> (+14.7%).</p>
+                    </div>
+                    <div class="slide-metric">
+                        <div class="slide-metric-label">Пострадали от мошенничества</div>
+                        <div class="slide-metric-value">3.8 млн</div>
+                        <div style="color: var(--cbr-green); font-weight: 600;"><i class="fas fa-arrow-down"></i> -10.3% к 2024 (2.6% населения)</div>
+                    </div>
+                    <div class="slide-metric">
+                        <div class="slide-metric-label">Сталкивались с мошенниками</div>
+                        <div class="slide-metric-value">29.1%</div>
+                        <div style="color: var(--cbr-green); font-weight: 600;"><i class="fas fa-arrow-down"></i> -14.4% к 2024 (42.6 млн чел.)</div>
+                    </div>
+                    <div class="slide-metric">
+                        <div class="slide-metric-label">Совершили действия под влиянием</div>
+                        <div class="slide-metric-value">17.9%</div>
+                        <div style="color: var(--cbr-red); font-weight: 600;"><i class="fas fa-arrow-up"></i> +14.7% к 2024 (ОПАСНО!)</div>
+                    </div>
+                `
+            },
+            {
+                title: "Три критических вывода",
+                icon: "lightbulb",
+                content: `
+                    <ul class="slide-list">
+                        <li>
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <div>
+                                <strong>Вывод 1: Социальная инженерия</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #666;">Информированность выросла до 68%, но уровень жертвоприношения остаётся на 18-22%</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone-volume"></i>
+                            <div>
+                                <strong>Вывод 2: Телефон/СМС - архиважно</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #666;">54.6% всех попыток, 83.1% успеха проникновения</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-users-cog"></i>
+                            <div>
+                                <strong>Вывод 3: Микросегментация</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #666;">5 MECE-профилей с разным ROI защиты (4.2x - 9.1x)</p>
+                            </div>
+                        </li>
+                    </ul>
+                `
+            },
+            {
+                title: "Демография жертв (2025)",
+                icon: "user-tag",
+                content: `
+                    <ul class="slide-list">
+                        <li>
+                            <i class="fas fa-briefcase"></i>
+                            <div>
+                                <strong>Работающие 25-44 (35.0%)</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem;">Риск: Средний | -1.1 п.п. к 2024</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-user-tie"></i>
+                            <div>
+                                <strong>Предпенсионный 45-64 (26.5%)</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem;">Риск: Средний-Высокий | -1.0 п.п.</p>
+                            </div>
+                        </li>
+                        <li style="background: #FFEBEE; border-color: var(--cbr-red);">
+                            <i class="fas fa-exclamation-triangle" style="color: var(--cbr-red);"></i>
+                            <div>
+                                <strong>Пенсионеры 65+ (18.8%)</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: var(--cbr-red);"><strong>Критично! +2.2 п.п. — Макс. рост!</strong></p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-user-graduate"></i>
+                            <div>
+                                <strong>Подростки 14-19 (10.7%)</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem;">Риск: Средний | -0.1 п.п.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-graduation-cap"></i>
+                            <div>
+                                <strong>Молодые 20-24 (9.0%)</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem;">Риск: Низкий-Средний | 0.0 п.п.</p>
+                            </div>
+                        </li>
+                    </ul>
+                    <div style="background: #FFF8E1; padding: 0.75rem; border-radius: 4px; margin-top: 0.75rem;">
+                        <p style="margin: 0; font-size: 0.85rem;">
+                            <i class="fas fa-venus-mars"></i>
+                            <strong>Гендер:</strong> 51.4% женщины / 48.6% мужчины (почти паритет!)
+                        </p>
+                    </div>
+                `
+            },
+            {
+                title: "Рекомендуемый сценарий",
+                icon: "star",
+                content: `
+                    <div class="slide-alert" style="background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%); border-color: var(--cbr-gold);">
+                        <h4 style="color: var(--cbr-gold);"><i class="fas fa-star"></i> Scenario-B: Комплексный подход</h4>
+                    </div>
+                    <div class="slide-metric">
+                        <div class="slide-metric-label">Инвестиция</div>
+                        <div class="slide-metric-value">8.5 млрд₽</div>
+                    </div>
+                    <div class="slide-metric" style="background: #E8F5E9; border-color: var(--cbr-green);">
+                        <div class="slide-metric-label">Предотвращено убытков</div>
+                        <div class="slide-metric-value" style="color: var(--cbr-green);">200 млрд₽</div>
+                    </div>
+                    <div class="slide-metric" style="background: #FFFBF0; border-color: var(--cbr-gold);">
+                        <div class="slide-metric-label">ROI</div>
+                        <div class="slide-metric-value" style="color: var(--cbr-gold);">12.7x</div>
+                    </div>
+                    <div class="slide-metric">
+                        <div class="slide-metric-label">Окупаемость</div>
+                        <div class="slide-metric-value">8 мес.</div>
+                    </div>
+                `
+            },
+            {
+                title: "Дорожная карта",
+                icon: "road",
+                content: `
+                    <ul class="slide-list">
+                        <li>
+                            <i class="fas fa-clipboard-check"></i>
+                            <div>
+                                <strong>Фаза 1: Диагностика</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem;">Янв-Март 2026 | 200M ₽</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-rocket"></i>
+                            <div>
+                                <strong>Фаза 2: Quick Wins</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem;">Апр-Июн 2026 | 3.0B ₽</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-brain"></i>
+                            <div>
+                                <strong>Фаза 3: Поведенческий сдвиг</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem;">Июл-Сен 2026 | 1.5B ₽</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-shield-alt"></i>
+                            <div>
+                                <strong>Фаза 4: Уплотнение</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem;">Окт-Дек 2026 | 2.5B ₽</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-sync-alt"></i>
+                            <div>
+                                <strong>Фаза 5: Оптимизация</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem;">2027+ | 1.5B ₽/год</p>
+                            </div>
+                        </li>
+                    </ul>
+                `
+            },
+            {
+                title: "Каналы мошенничества (2025)",
+                icon: "project-diagram",
+                content: `
+                    <ul class="slide-list">
+                        <li style="border-color: var(--cbr-red); background: #FFEBEE;">
+                            <i class="fas fa-phone" style="color: var(--cbr-red);"></i>
+                            <div>
+                                <strong>Телефон/СМС (54.6%)</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: var(--cbr-red);">Доминирующий канал! +9.0 п.п. к 2024</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fab fa-whatsapp"></i>
+                            <div>
+                                <strong>Мессенджеры (16.1%)</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem;">+0.4 п.п. к 2024 (15.7%)</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-share-alt"></i>
+                            <div>
+                                <strong>Социальные сети (12.1%)</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem;">+1.8 п.п. к 2024 (10.3%)</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-globe"></i>
+                            <div>
+                                <strong>Поддельные сайты (4.8%)</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem;">+1.6 п.п. к 2024 (3.2%)</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-id-card"></i>
+                            <div>
+                                <strong>Госуслуги (3.8%)</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem;">-3.2 п.п. к 2024 (7.0%)</p>
+                            </div>
+                        </li>
+                        <li style="border-color: var(--cbr-red);">
+                            <i class="fas fa-virus"></i>
+                            <div>
+                                <strong>Вирусы/вредоносные ссылки (3.3%)</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem;">+1.5 п.п. к 2024 (1.8%)</p>
+                            </div>
+                        </li>
+                    </ul>
+                `
+            },
+            {
+                title: "Распределение убытков (2025)",
+                icon: "ruble-sign",
+                content: `
+                    <ul class="slide-list">
+                        <li>
+                            <i class="fas fa-coins"></i>
+                            <div>
+                                <strong>До 20 тыс. руб. (54.0%)</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem;">-1.3 п.п. к 2024</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-money-bill-wave"></i>
+                            <div>
+                                <strong>От 20 до 100 тыс. руб. (20.2%)</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem;">-0.1 п.п. к 2024</p>
+                            </div>
+                        </li>
+                        <li style="background: #FFF8E1; border-color: var(--cbr-gold);">
+                            <i class="fas fa-wallet" style="color: var(--cbr-gold);"></i>
+                            <div>
+                                <strong>От 100 до 500 тыс. руб. (14.6%)</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: var(--cbr-gold);"><strong>+1.6 п.п. к 2024 (рост!)</strong></p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-hand-holding-usd"></i>
+                            <div>
+                                <strong>От 500 тыс. до 1 млн руб. (4.9%)</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem;">-1.0 п.п. к 2024</p>
+                            </div>
+                        </li>
+                        <li style="background: #FFEBEE; border-color: var(--cbr-red);">
+                            <i class="fas fa-exclamation-triangle" style="color: var(--cbr-red);"></i>
+                            <div>
+                                <strong>Свыше 1 млн руб. (6.3%)</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: var(--cbr-red);"><strong>+0.8 п.п. к 2024 (тревожно!)</strong></p>
+                            </div>
+                        </li>
+                    </ul>
+                    <div style="background: #E3F2FD; padding: 0.75rem; border-radius: 4px; margin-top: 0.75rem;">
+                        <p style="margin: 0; font-size: 0.85rem;">
+                            <i class="fas fa-chart-line" style="color: var(--cbr-blue);"></i>
+                            <strong>Тренд:</strong> Рост крупных хищений (100K+) на 2.4 п.п. — мошенники становятся амбициознее!
+                        </p>
+                    </div>
+                `
+            },
+            {
+                title: "Типы похищенных средств",
+                icon: "credit-card",
+                content: `
+                    <ul class="slide-list">
+                        <li style="border-color: var(--cbr-blue);">
+                            <i class="fas fa-wallet"></i>
+                            <div>
+                                <strong>Собственные деньги (68.5%)</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem;">-2.7 п.п. к 2024</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-hand-holding-usd"></i>
+                            <div>
+                                <strong>Кредитные/заемные (17.1%)</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem;">+1.7 п.п. к 2024</p>
+                            </div>
+                        </li>
+                        <li style="border-color: var(--cbr-red);">
+                            <i class="fas fa-exchange-alt"></i>
+                            <div>
+                                <strong>Собственные + Кредитные (14.4%)</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem;">+1.0 п.п. к 2024</p>
+                            </div>
+                        </li>
+                    </ul>
+                    <div style="background: #FFEBEE; padding: 0.75rem; border-radius: 4px; margin-top: 0.75rem;">
+                        <p style="margin: 0; font-size: 0.85rem;">
+                            <i class="fas fa-exclamation-circle" style="color: var(--cbr-red);"></i>
+                            <strong>31.5%</strong> жертв теряют кредитные средства — долговая яма!
+                        </p>
+                    </div>
+                `
+            },
+            {
+                title: "ML-модель: Точность 89.7%",
+                icon: "brain",
+                content: `
+                    <div class="slide-metric">
+                        <div class="slide-metric-label">Accuracy</div>
+                        <div class="slide-metric-value" style="color: var(--cbr-green);">89.7%</div>
+                    </div>
+                    <div class="slide-metric">
+                        <div class="slide-metric-label">Recall</div>
+                        <div class="slide-metric-value" style="color: var(--cbr-green);">88.5%</div>
+                    </div>
+                    <div class="slide-metric">
+                        <div class="slide-metric-label">F1-Score</div>
+                        <div class="slide-metric-value" style="color: var(--cbr-green);">88.8%</div>
+                    </div>
+                    <div class="slide-metric">
+                        <div class="slide-metric-label">AUC-ROC</div>
+                        <div class="slide-metric-value" style="color: var(--cbr-green);">0.92</div>
+                    </div>
+                    <div style="background: #E8F5E9; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                        <p style="margin: 0; font-size: 0.9rem;">
+                            <i class="fas fa-check-circle" style="color: var(--cbr-green);"></i>
+                            <strong>Production-ready:</strong> Модель валидирована на N=59,503 случаях
+                        </p>
+                    </div>
+                `
+            },
+            {
+                title: "Действия под влиянием (2024)",
+                icon: "user-secret",
+                content: `
+                    <div style="background: #FFEBEE; padding: 0.75rem; border-radius: 4px; margin-bottom: 0.75rem; border-left: 4px solid var(--cbr-red);">
+                        <p style="margin: 0; font-size: 0.85rem;">
+                            <strong><i class="fas fa-exclamation-triangle"></i> 17.9% (2025)</strong> совершили действия под влиянием (+14.7% к 2024!)
+                        </p>
+                    </div>
+                    <ul class="slide-list">
+                        <li style="border-color: var(--cbr-red);">
+                            <i class="fas fa-link"></i>
+                            <div>
+                                <strong>Переход по вредоносной ссылке (18.9%)</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem;">#1 действие среди всех</p>
+                            </div>
+                        </li>
+                        <li style="border-color: var(--cbr-red);">
+                            <i class="fas fa-money-bill-transfer"></i>
+                            <div>
+                                <strong>Перевод денег мошеннику (15.6%)</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem;">#1 среди жертв (36.0%)</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-id-card"></i>
+                            <div>
+                                <strong>Сообщили код Госуслуг (11.2%)</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem;">Доступ к персональным данным</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-sms"></i>
+                            <div>
+                                <strong>Сообщили код из СМС банка (10.8%)</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem;">Подтверждение операций</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-credit-card"></i>
+                            <div>
+                                <strong>Ввели данные карты (7.6%)</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem;">CVV, номер, срок действия</p>
+                            </div>
+                        </li>
+                    </ul>
+                `
+            },
+            {
+                title: "Возврат средств и обращения",
+                icon: "undo",
+                content: `
+                    <div class="slide-metric" style="background: #FFEBEE; border-color: var(--cbr-red);">
+                        <div class="slide-metric-label">Банк НЕ вернул деньги</div>
+                        <div class="slide-metric-value" style="color: var(--cbr-red);">82.7%</div>
+                    </div>
+                    <div class="slide-metric" style="background: #E8F5E9; border-color: var(--cbr-green);">
+                        <div class="slide-metric-label">Полностью вернул</div>
+                        <div class="slide-metric-value" style="color: var(--cbr-green);">12.7%</div>
+                    </div>
+                    <div class="slide-metric">
+                        <div class="slide-metric-label">Частично вернул</div>
+                        <div class="slide-metric-value">4.6%</div>
+                    </div>
+                    <div style="margin-top: 1rem;"><strong>Куда обращаются жертвы (2025):</strong></div>
+                    <ul class="slide-list" style="margin-top: 0.5rem;">
+                        <li>
+                            <i class="fas fa-university"></i>
+                            <div>
+                                <strong>В банк (41.3%)</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem;">-1.5 п.п. к 2024</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-shield-alt"></i>
+                            <div>
+                                <strong>В полицию (32.0%)</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem;">+2.0 п.п. к 2024</p>
+                            </div>
+                        </li>
+                        <li style="border-color: var(--cbr-red);">
+                            <i class="fas fa-times-circle"></i>
+                            <div>
+                                <strong>Никуда (16.2%)</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem;">-2.1 п.п. к 2024 (улучшение!)</p>
+                            </div>
+                        </li>
+                    </ul>
+                `
+            },
+            {
+                title: "Управление рисками",
+                icon: "exclamation-triangle",
+                content: `
+                    <ul class="slide-list">
+                        <li>
+                            <i class="fas fa-user-slash"></i>
+                            <div>
+                                <strong>Сопротивление пользователей (30%)</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem;">Контрмера: UX-оптимизация</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-user-secret"></i>
+                            <div>
+                                <strong>Адаптация мошенников (40%)</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem;">Контрмера: ML-обновления</p>
+                            </div>
+                        </li>
+                        <li style="border-color: var(--cbr-red);">
+                            <i class="fas fa-ban"></i>
+                            <div>
+                                <strong>Отказ мессенджеров (20%)</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem;">Контрмера: Переговоры</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-server"></i>
+                            <div>
+                                <strong>Технический отказ (15%)</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem;">Контрмера: Fallback</p>
+                            </div>
+                        </li>
+                    </ul>
+                `
+            },
+            {
+                title: "Ожидаемые результаты",
+                icon: "chart-line",
+                content: `
+                    <div class="slide-alert">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Без действий</h4>
+                        <p>2026: <strong>35 млрд RUR</strong> (рост +17%)</p>
+                    </div>
+                    <div class="slide-metric" style="background: #E8F5E9; border-color: var(--cbr-green);">
+                        <div class="slide-metric-label">С внедрением Scenario-B</div>
+                        <div class="slide-metric-value" style="color: var(--cbr-green);">22 млрд RUR</div>
+                        <div style="color: var(--cbr-green); font-weight: 600;"><i class="fas fa-arrow-down"></i> Снижение на 26%</div>
+                    </div>
+                    <div style="background: #E3F2FD; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                        <p style="margin: 0; font-weight: 600; color: var(--cbr-blue-dark);">
+                            <i class="fas fa-check-circle" style="color: var(--cbr-green);"></i>
+                            Экономия: <strong style="color: var(--cbr-green);">13 млрд RUR за год</strong>
+                        </p>
+                    </div>
+                    <div style="margin-top: 1rem; padding: 1rem; background: #FFF8E1; border-radius: 8px;">
+                        <p style="margin: 0; font-size: 0.9rem; color: var(--cbr-text);">
+                            <i class="fas fa-lightbulb" style="color: var(--cbr-gold);"></i>
+                            Это не затрата, это инвестиция с наивысшим ROI в истории ЦБ РФ (12.7x)
+                        </p>
+                    </div>
+                `
+            },
+            {
+                title: "Рекомендация для Совета",
+                icon: "check-circle",
+                content: `
+                    <div class="slide-alert" style="background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%); border-color: var(--cbr-gold);">
+                        <h4 style="color: var(--cbr-gold);"><i class="fas fa-star"></i> Немедленные действия</h4>
+                        <p>Утвердить Scenario-B в качестве основного плана</p>
+                    </div>
+                    <ul class="slide-list">
+                        <li>
+                            <i class="fas fa-play-circle"></i>
+                            <div>
+                                <strong>Q4 2025 (немедленно)</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem;">Запустить Scenario-A (2.9B ₽)</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-forward"></i>
+                            <div>
+                                <strong>Q2-Q4 2026</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem;">Масштабировать до Scenario-B</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-flask"></i>
+                            <div>
+                                <strong>2027+ (опционально)</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem;">Исследовать Scenario-C</p>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="slide-progress-container">
+                        <div class="slide-progress-header">
+                            <span>Прогресс внедрения</span>
+                            <span><strong>12 месяцев</strong></span>
+                        </div>
+                        <div class="slide-progress-bar">
+                            <div class="slide-progress-fill" style="width: 100%;"></div>
+                        </div>
+                    </div>
+                `
+            }
+        ];
+        
+        function initMobileSlides() {
+            const track = document.getElementById('slidesTrack');
+            const dotsContainer = document.getElementById('slideDots');
+            
+            track.innerHTML = '';
+            dotsContainer.innerHTML = '';
+            
+            slidesData.forEach((slideData, index) => {
+                // Create slide
+                const slide = document.createElement('div');
+                slide.className = 'slide';
+                slide.innerHTML = `
+                    <h3><i class="fas fa-${slideData.icon}"></i> ${slideData.title}</h3>
+                    <div class="slide-content">${slideData.content}</div>
+                `;
+                track.appendChild(slide);
+                
+                // Create dot
+                const dot = document.createElement('div');
+                dot.className = `slide-dot ${index === 0 ? 'active' : ''}`;
+                dot.onclick = () => goToSlide(index);
+                dotsContainer.appendChild(dot);
+            });
+            
+            setupTouchEvents();
+            updateSlide();
+        }
+        
+        function setupTouchEvents() {
+            const wrapper = document.getElementById('slidesWrapper');
+            
+            wrapper.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+            
+            wrapper.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+        }
+        
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            }
+        }
+        
+        function nextSlide() {
+            if (currentSlide < slidesData.length - 1) {
+                currentSlide++;
+                updateSlide();
+            }
+        }
+        
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlide();
+            }
+        }
+        
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlide();
+        }
+        
+        function updateSlide() {
+            const track = document.getElementById('slidesTrack');
+            const title = document.getElementById('mobileSlideTitle');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const dots = document.querySelectorAll('.slide-dot');
+            
+            // Update transform
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Update title
+            title.textContent = slidesData[currentSlide].title;
+            
+            // Update buttons
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === slidesData.length - 1;
+            
+            // Update dots
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+            
+            // Scroll to top of slide
+            const slides = document.querySelectorAll('.slide');
+            if (slides[currentSlide]) {
+                slides[currentSlide].scrollTop = 0;
+            }
+        }
+        
+        let mobileViewFirstTime = true;
+        
+        function toggleMobileView() {
+            const container = document.getElementById('mobileSlidesContainer');
+            const isActive = container.classList.contains('active');
+            
+            if (isActive) {
+                container.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            } else {
+                if (!container.querySelector('.slide').length) {
+                    initMobileSlides();
+                }
+                container.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                currentSlide = 0;
+                updateSlide();
+                
+                // Show hint on first use
+                if (mobileViewFirstTime) {
+                    showSwipeHint();
+                    mobileViewFirstTime = false;
+                }
+            }
+        }
+        
+        function showSwipeHint() {
+            const hint = document.createElement('div');
+            hint.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: rgba(0, 91, 170, 0.95);
+                color: white;
+                padding: 1.5rem 2rem;
+                border-radius: 12px;
+                z-index: 10001;
+                text-align: center;
+                animation: fadeIn 0.3s ease;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            `;
+            hint.innerHTML = `
+                <i class="fas fa-hand-pointer" style="font-size: 2rem; margin-bottom: 0.5rem; display: block;"></i>
+                <div style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem;">Пролистывайте слайды</div>
+                <div style="font-size: 0.85rem; opacity: 0.9;">Смахните влево/вправо или используйте кнопки</div>
+            `;
+            document.body.appendChild(hint);
+            
+            setTimeout(() => {
+                hint.style.opacity = '0';
+                hint.style.transition = 'opacity 0.3s ease';
+                setTimeout(() => hint.remove(), 300);
+            }, 2500);
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const container = document.getElementById('mobileSlidesContainer');
+            if (container.classList.contains('active')) {
+                if (e.key === 'ArrowLeft') prevSlide();
+                if (e.key === 'ArrowRight') nextSlide();
+                if (e.key === 'Escape') toggleMobileView();
+            }
+        });
 
         // ===== AI CHAT FUNCTIONS =====
         
